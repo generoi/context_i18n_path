@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file context_i18n_path.module
+ */
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function context_18n_path_ctools_plugin_api($module, $api) {
+  if ($module == 'context' && $api == 'plugins') {
+    return array('version' => 3);
+  }
+}
+
+/**
+ * Implements hook_context_plugins().
+ */
+function context_i18n_path_context_plugins() {
+  return array(
+    'i18n_path' => array(
+      'handler' => array(
+        'path' => drupal_get_path('module', 'context_i18n_path'),
+        'file' => 'context_i18n_path.context.inc',
+        'class' => 'context_i18n_path_condition',
+        'parent' => 'context_condition_path',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_context_registry().
+ */
+function context_i18n_path_context_registry() {
+  return array(
+    'conditions' => array(
+      'i18n_path' => array(
+        'title' => t('I18n Path'),
+        'description' => t('Set the context on the basis of translated paths'),
+        'plugin' => 'i18n_path',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements of hook_context_page_condition().
+ */
+function context_i18n_path_context_page_condition() {
+  if ($plugin = context_get_plugin('condition', 'i18n_path')) {
+    $plugin->execute();
+  }
+}

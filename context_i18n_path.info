@@ -1,0 +1,6 @@
+name = Context i18n path
+description = Context condition for translated paths
+dependencies[] = context
+dependencies[] = translation
+package = custom
+core = 7.x
