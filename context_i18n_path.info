@@ -4,3 +4,5 @@ dependencies[] = context
 dependencies[] = translation
 package = custom
 core = 7.x
+
+files[] = context_i18n_path.context.inc
